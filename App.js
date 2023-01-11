@@ -2,6 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import {useState} from 'react'
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 import CustomButton from './components/CustomButton';
+import AppStyle from './styles/AppStyle';
+
+const styles = AppStyle()
 
 export default function App() {
 
@@ -21,19 +24,3 @@ export default function App() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  input:{
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 10,
-    padding: 10,
-    width: '80%'
-  }
-});

@@ -1,6 +1,10 @@
 import { Text, TouchableOpacity, View, StyleSheet } from 'react-native'
 import React from 'react'
 
+import ButtonStyle from '../styles/ButtonStyle'
+
+const styles = ButtonStyle()
+
 const CustomButton = ({ text, color, state }) => {
   return (
     <View>
@@ -12,18 +16,3 @@ const CustomButton = ({ text, color, state }) => {
 }
 
 export default CustomButton
-
-const styles = StyleSheet.create({
-  button: {
-    margin: 20,
-    padding: 12,
-    borderRadius: 10,
-    width: 350
-  },
-  text: {
-    color: 'white',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 17
-  }
-})
