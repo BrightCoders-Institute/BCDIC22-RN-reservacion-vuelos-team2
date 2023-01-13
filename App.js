@@ -8,12 +8,11 @@ import {
   ScrollView
 } from 'react-native'
 import { Formik } from 'formik'
-import Ionicons from '@expo/vector-icons/Ionicons'
 import Checkbox from 'expo-checkbox'
 import { InputComponent } from './components/InputComponent'
 import { graphics, controls, containers, texts } from './styles/AppStyle.js'
 
-export default function App () {
+export default function App() {
   // const validate = (values) => {
   //   const errors = {}
   //   if (values.password.length < 8) errors.password = 'Use eight or more characters'
@@ -43,23 +42,21 @@ export default function App () {
               />
               <Text style={texts.titlesText}>Email *</Text>
 
-              <InputComponent handleChange={handleChange} values={values} />
+              <InputComponent
+                handleChange={handleChange}
+                values={values}
+                type='text'
+              />
               <Text style={texts.titlesText} type='text'>
                 Password *
               </Text>
-              <View style={containers.iconContainer}>
-                <InputComponent
-                  handleChange={handleChange}
-                  values={values}
-                  type='password'
-                />
-                <Ionicons
-                  style={graphics.icon}
-                  name='eye'
-                  size={18}
-                  color='gray'
-                />
-              </View>
+
+              <InputComponent
+                handleChange={handleChange}
+                values={values}
+                type='password'
+              />
+
 
               {errors.password ? <Text>{errors.password}</Text> : <></>}
               <Text style={texts.warningPassword}>
@@ -78,7 +75,7 @@ export default function App () {
               </View>
               <View style={containers.checkContainer}>
                 <Checkbox
-                  svalue={isChecked2}
+                  value={isChecked2}
                   onValueChange={setChecked2}
                   color={isChecked2 ? '#4630EB' : undefined}
                 />
