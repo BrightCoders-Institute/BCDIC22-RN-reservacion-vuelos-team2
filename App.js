@@ -1,177 +1,116 @@
-import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View, TextInput, ScrollView } from 'react-native';
-import { Formik } from 'formik';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { useState } from 'react'
+import {
+  Button,
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  ScrollView
+} from 'react-native'
+import { Formik } from 'formik'
+import Ionicons from '@expo/vector-icons/Ionicons'
+import Checkbox from 'expo-checkbox'
+import { InputComponent } from './components/InputComponent'
+import { graphics, controls, containers, texts } from './styles/AppStyle.js'
 
-export default function App() {
+export default function App () {
+  // const validate = (values) => {
+  //   const errors = {}
+  //   if (values.password.length < 8) errors.password = 'Use eight or more characters'
+  //   alert(errors)
+  // }
 
-  const validate = (values) => {
-    const errors = {}
-    if (values.password.length < 8) errors.password = 'Use eight or more characters'
-    alert(errors)
-  }
+  const [isChecked, setChecked] = useState(false)
+  const [isChecked2, setChecked2] = useState(false)
 
   return (
-    <View style={styles.container}>
+    <View style={containers.container}>
       <ScrollView>
-        <View style={styles.content}>
-          <Text style={styles.tittle}>Sign Up</Text>
-          <Formik
-            onSubmit={values => {
-              validate(values);
-              Keyboard.dismiss();
-            }}>
+        <Text style={texts.tittle}>Sign Up</Text>
+        <Formik
+          onSubmit={values => {
+            validate(values)
+            Keyboard.dismiss()
+          }}
+        >
+          {({ handleChange, handleSubmit, values, errors }) => (
+            <View style={containers.screenContainer}>
+              <Text style={texts.titlesText}>First Name</Text>
+              <InputComponent
+                handleChange={handleChange}
+                values={values}
+                type='text'
+              />
+              <Text style={texts.titlesText}>Email *</Text>
 
-            {({ handleChange, handleSubmit, values, errors }) => (
-              <View>
-                <Text style={styles.titlesText}>First Name</Text>
-                <TextInput
-                  onChangeText={handleChange('firstName')}
-                  name="firstName"
-                  value={values.firstName}
-                  label="firstName"
-
-                  style={styles.input}
+              <InputComponent handleChange={handleChange} values={values} />
+              <Text style={texts.titlesText} type='text'>
+                Password *
+              </Text>
+              <View style={containers.iconContainer}>
+                <InputComponent
+                  handleChange={handleChange}
+                  values={values}
+                  type='password'
                 />
-                <Text style={styles.titlesText}>Email *</Text>
-                <TextInput
-                  onChangeText={handleChange('email')}
-                  name="email"
-                  value={values.email}
-                  label="email"
-
-                  style={styles.input}
+                <Ionicons
+                  style={graphics.icon}
+                  name='eye'
+                  size={18}
+                  color='gray'
                 />
-                  <Text style={styles.titlesText}>Password *</Text>
-                  <View style={styles.iconContainer}>
-
-                    <TextInput
-                      onChangeText={handleChange('password')}
-                      name="password"
-                      value={values.password}
-                      label="password"
-                      secureTextEntry={true}
-                      style={styles.input}
-                    />
-                    <Ionicons
-                      style={styles.icon}
-                      name='eye'
-                      size={18}
-                      color='black'
-                    />
-                  
-
-              
               </View>
-                {errors.password ? (
-              <Text>{errors.password}</Text>
-            ) : (
-              <></>
-            )}
-            <Text style={styles.smallText}>Use 8 or more characters with a mix of letters, numbers and symbols</Text>
-            <View style={styles.check}>
-              <Text style={styles.textCheck}>I agree to the Terms and Privacy Policy</Text>
-              <Text>Suscribe for select product updates</Text>
-            </View>
-            <View style={styles.buttonsContainer}>
-              <Button onPress={handleSubmit} style={styles.button} title="Submit" />
-              <Text style={styles.largeText}>or</Text>
-              <Button onPress={handleSubmit} style={styles.button} title="Submit" />
-              <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-                <Text style={styles.largeText}>Already have an account? </Text>
-                <Text style={[styles.largeText, styles.login]}>Log In</Text>
+
+              {errors.password ? <Text>{errors.password}</Text> : <></>}
+              <Text style={texts.warningPassword}>
+                Use 8 or more characters with a mix of letters, numbers and
+                symbols
+              </Text>
+              <View style={containers.checkContainer}>
+                <Checkbox
+                  value={isChecked}
+                  onValueChange={setChecked}
+                  color={isChecked ? '#4630EB' : undefined}
+                />
+                <Text style={texts.textCheck}>
+                  I agree to the Terms and Privacy Policy
+                </Text>
+              </View>
+              <View style={containers.checkContainer}>
+                <Checkbox
+                  svalue={isChecked2}
+                  onValueChange={setChecked2}
+                  color={isChecked2 ? '#4630EB' : undefined}
+                />
+                <Text style={texts.textCheck}>
+                  Suscribe for select product updates
+                </Text>
+              </View>
+              <View style={containers.buttonsContainer}>
+                <Button
+                  onPress={handleSubmit}
+                  style={controls.button}
+                  title='Submit'
+                />
+                <Text style={texts.accountText}>or</Text>
+                <Button
+                  onPress={handleSubmit}
+                  style={controls.button}
+                  title='Submit'
+                />
+                <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                  <Text style={texts.accountText}>
+                    Already have an account?{' '}
+                  </Text>
+                  <Text style={[texts.accountText, texts.loginText]}>
+                    Log In
+                  </Text>
+                </View>
               </View>
             </View>
-        </View>
-            )}
-      </Formik>
+          )}
+        </Formik>
+      </ScrollView>
     </View>
-      </ScrollView >
-    </View >
-  );
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-    paddingHorizontal: 20,
-    justifyContent: 'center',
-    marginVertical: 25
-  },
-  content: {
-    padding: 16,
-  },
-  button: {
-    marginVertical: 20,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: 'gray',
-    width: '100%',
-    height: 45,
-    marginTop: 10,
-    fontWeight: 'bold',
-    fontSize: 18,
-    flex: 1,
-    alignItems: 'center',
-  },
-  iconContainer: {
-    //display: 'flex',
-    // flex: 1,
-    flexDirection: 'row',
-   // backgroundColor: 'yellow',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    height: 45,
-    // paddingTop: 10,
-    // marginTop: 10,
-    // borderWidth: 1,
-    // borderColor: 'gray',
-  },
-  icon: {
-    //backgroundColor: 'red',
-    marginTop: 15,
-    padding: 7,
-    position: 'absolute'
-  },
-  tittle: {
-    fontSize: 23,
-    fontWeight: 'bold',
-    color: '#5c6ef8'
-  },
-  titlesText: {
-    fontSize: 17,
-    color: 'grey',
-    marginTop: 12
-  },
-  smallText: {
-    color: 'gray',
-    fontSize: 13,
-    marginTop: 10
-  },
-  textCheck: {
-    marginVertical: 10
-  },
-  check: {
-    marginVertical: 30
-  },
-  buttonsContainer: {
-    alignSelf: 'center',
-
-    width: '100%',
-    display: 'flex',
-
-
-  },
-  largeText: {
-    fontSize: 18,
-    textAlign: 'center',
-    color: 'grey',
-    marginVertical: 15
-  },
-  login: {
-    color: '#5c6ef8',
-    textDecorationLine: 'underline'
-  }
-});
