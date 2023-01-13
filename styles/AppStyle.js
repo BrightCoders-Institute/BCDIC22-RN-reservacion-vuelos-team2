@@ -5,7 +5,14 @@ export const graphics = StyleSheet.create({
     marginTop: 23,
     paddingRight: 10,
     position: 'absolute'
+  },
+  iconActive:{
+    color: '#5C6EF8'
+  },
+  iconInactive:{
+    color: '#B6B7BA'
   }
+
 })
 
 export const controls = StyleSheet.create({
@@ -24,10 +31,10 @@ export const controls = StyleSheet.create({
     paddingLeft: 5
   },
   inputActive: {
-    borderColor: 'purple'
+    borderColor: '#5C6EF8'
   },
   inputInactive: {
-    borderColor: 'gray'
+    borderColor: '#B6B7BA'
   }
 })
 
