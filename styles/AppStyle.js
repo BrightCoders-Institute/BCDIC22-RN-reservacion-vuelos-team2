@@ -6,10 +6,10 @@ export const graphics = StyleSheet.create({
     paddingRight: 10,
     position: 'absolute'
   },
-  iconActive:{
+  iconActive: {
     color: '#5C6EF8'
   },
-  iconInactive:{
+  iconInactive: {
     color: '#B6B7BA'
   }
 
@@ -35,6 +35,9 @@ export const controls = StyleSheet.create({
   },
   inputInactive: {
     borderColor: '#B6B7BA'
+  },
+  check: {
+    marginRight: 10
   }
 })
 
@@ -51,7 +54,7 @@ export const containers = StyleSheet.create({
     alignSelf: 'center',
     width: '100%',
     display: 'flex',
-    marginTop: 20
+    alignItems: 'center'
   },
   iconContainer: {
     flexDirection: 'row',
@@ -67,7 +70,19 @@ export const containers = StyleSheet.create({
   },
   screenContainer: {
     marginTop: 20
+  },
+  underlinedTextContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }, footerContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    
+    alignItems:'center'
   }
+
 })
 
 export const texts = StyleSheet.create({
@@ -90,17 +105,20 @@ export const texts = StyleSheet.create({
   textCheck: {
     marginVertical: 10,
     color: 'grey',
-    marginLeft: 10,
-    fontSize: 13
+    fontSize: 15,
   },
   accountText: {
     fontSize: 18,
     textAlign: 'center',
     color: 'gray',
-    marginVertical: 15
+    marginVertical: 8
   },
   loginText: {
     color: '#5c6ef8',
     textDecorationLine: 'underline'
+  },
+  asterisk: {
+    color: 'red',
+    fontWeight: 'bold'
   }
 })

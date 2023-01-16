@@ -5,12 +5,15 @@ import {
   Text,
   View,
   TextInput,
-  ScrollView
+  ScrollView,
+  TouchableOpacity
 } from 'react-native'
 import { Formik } from 'formik'
 import Checkbox from 'expo-checkbox'
 import { InputComponent } from './components/InputComponent'
 import { graphics, controls, containers, texts } from './styles/AppStyle.js'
+import CustomButton from './components/CustomButton'
+import UnderlinedText from './components/UnderlinedText'
 
 export default function App() {
   // const validate = (values) => {
@@ -21,6 +24,8 @@ export default function App() {
 
   const [isChecked, setChecked] = useState(false)
   const [isChecked2, setChecked2] = useState(false)
+  const [inputText, setInputText] = useState('')
+
 
   return (
     <View style={containers.container}>
@@ -37,15 +42,19 @@ export default function App() {
               <Text style={texts.titlesText}>First Name</Text>
               <InputComponent
                 handleChange={handleChange}
+                inputText={inputText}
                 values={values}
                 type='text'
               />
+
               <Text style={texts.titlesText}>Email *</Text>
 
               <InputComponent
                 handleChange={handleChange}
                 values={values}
                 type='text'
+                onChangeText={value => setInputText(value)}
+
               />
               <Text style={texts.titlesText} type='text'>
                 Password *
@@ -55,8 +64,8 @@ export default function App() {
                 handleChange={handleChange}
                 values={values}
                 type='password'
+                onChangeText={value => setInputText(value)}
               />
-
 
               {errors.password ? <Text>{errors.password}</Text> : <></>}
               <Text style={texts.warningPassword}>
@@ -68,40 +77,47 @@ export default function App() {
                   value={isChecked}
                   onValueChange={setChecked}
                   color={isChecked ? '#4630EB' : undefined}
+                  style={controls.check}
                 />
-                <Text style={texts.textCheck}>
-                  I agree to the Terms and Privacy Policy
-                </Text>
+                <View style={containers.underlinedTextContainer}>
+                  <Text style={texts.textCheck}>I agree to the </Text>
+                  <UnderlinedText text='Terms' color='gray' />
+                  <Text style={texts.textCheck}> and </Text> 
+                  <UnderlinedText text=' Privacy Policy.' color='gray'/>
+                  <Text style={texts.asterisk}> *</Text> 
+                </View>
               </View>
               <View style={containers.checkContainer}>
                 <Checkbox
                   value={isChecked2}
                   onValueChange={setChecked2}
                   color={isChecked2 ? '#4630EB' : undefined}
+                  style={controls.check}
                 />
                 <Text style={texts.textCheck}>
                   Suscribe for select product updates
                 </Text>
               </View>
               <View style={containers.buttonsContainer}>
-                <Button
-                  onPress={handleSubmit}
-                  style={controls.button}
-                  title='Submit'
-                />
+                {isChecked && isChecked2 === true ?
+                  <CustomButton text='Sign Up' disabled={false} /> :
+                  <CustomButton text='Sign Up' disabled={true} />
+                }
+
                 <Text style={texts.accountText}>or</Text>
-                <Button
-                  onPress={handleSubmit}
-                  style={controls.button}
-                  title='Submit'
-                />
-                <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+
+                {isChecked && isChecked2 === true ?
+                  <CustomButton text='Sign Up with Google' disabled={false} /> :
+                  <CustomButton text='Sign Up with Google' disabled={true} />
+                }
+
+                <View style={containers.footerContainer}>
                   <Text style={texts.accountText}>
                     Already have an account?{' '}
                   </Text>
-                  <Text style={[texts.accountText, texts.loginText]}>
-                    Log In
-                  </Text>
+                  <UnderlinedText text='Login' 
+                    color='purple'
+                  />
                 </View>
               </View>
             </View>
