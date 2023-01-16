@@ -1,9 +1,9 @@
-import { TextInput, View, Pressable, TouchableOpacity } from 'react-native'
-import { containers, controls, graphics } from '../styles/AppStyle'
+import { TextInput, View, TouchableOpacity } from 'react-native'
+import { graphics, controls, containers } from '../styles/InputStyle'
 import { useState } from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons'
 
-export const InputComponent = ({ handleChange, values, type }) => {
+export const CustomInput = ({ values, type }) => {
   const [inputText, setInputText] = useState('')
   const [passwordVisible, setPasswordVisible] = useState(false)
 

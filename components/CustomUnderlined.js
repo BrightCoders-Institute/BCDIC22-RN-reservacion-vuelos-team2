@@ -1,11 +1,11 @@
 import React from 'react'
 import {
   Text,
-  View, TouchableOpacity
+  TouchableOpacity
 } from 'react-native';
-import { texts } from '../styles/UnderlinedTextStyle'
+import { texts } from '../styles/UnderlinedStyle'
 
-const UnderlinedText = ({ text,color }) => {
+const CustomUnderlined = ({ text,color }) => {
   return (
     <TouchableOpacity>
       <Text
@@ -15,4 +15,4 @@ const UnderlinedText = ({ text,color }) => {
   );
 };
 
-export default UnderlinedText;
+export default CustomUnderlined;

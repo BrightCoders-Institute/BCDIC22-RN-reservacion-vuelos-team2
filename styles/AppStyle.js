@@ -1,41 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-export const graphics = StyleSheet.create({
-  icon: {
-    marginTop: 23,
-    paddingRight: 10,
-    position: 'absolute'
-  },
-  iconActive: {
-    color: '#5C6EF8'
-  },
-  iconInactive: {
-    color: '#B6B7BA'
-  }
-
-})
-
 export const controls = StyleSheet.create({
-  button: {
-    marginVertical: 20
-  },
-  input: {
-    borderWidth: 1,
-    width: '100%',
-    height: 45,
-    marginTop: 10,
-    fontWeight: 'bold',
-    fontSize: 18,
-    alignItems: 'center',
-    fontSize: 14,
-    paddingLeft: 5
-  },
-  inputActive: {
-    borderColor: '#5C6EF8'
-  },
-  inputInactive: {
-    borderColor: '#B6B7BA'
-  },
   check: {
     marginRight: 10
   }
@@ -56,13 +21,6 @@ export const containers = StyleSheet.create({
     display: 'flex',
     alignItems: 'center'
   },
-  iconContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    height: 55
-    //backgroundColor: 'red',
-    //paddingTop:10
-  },
   checkContainer: {
     display: 'flex',
     flexDirection: 'row',
@@ -76,17 +34,16 @@ export const containers = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
-  }, footerContainer: {
+  },
+  footerContainer: {
     display: 'flex',
     flexDirection: 'row',
-    
     alignItems:'center'
   }
-
 })
 
 export const texts = StyleSheet.create({
-  tittle: {
+  title: {
     fontSize: 23,
     fontWeight: 'bold',
     color: '#5c6ef8'
@@ -105,17 +62,13 @@ export const texts = StyleSheet.create({
   textCheck: {
     marginVertical: 10,
     color: 'grey',
-    fontSize: 15,
+    fontSize: 15
   },
   accountText: {
     fontSize: 18,
     textAlign: 'center',
     color: 'gray',
     marginVertical: 8
-  },
-  loginText: {
-    color: '#5c6ef8',
-    textDecorationLine: 'underline'
   },
   asterisk: {
     color: 'red',

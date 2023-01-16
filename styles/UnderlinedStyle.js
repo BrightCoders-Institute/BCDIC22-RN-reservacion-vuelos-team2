@@ -1,10 +1,7 @@
 import { StyleSheet } from 'react-native'
 
 export const texts = StyleSheet.create({
-  
   underlinedText: {
-    //marginVertical: 10,
-    //marginLeft: 10,
     fontSize: 15,
     color: 'gray',
     textDecorationLine: 'underline'

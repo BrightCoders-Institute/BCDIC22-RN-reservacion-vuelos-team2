@@ -13,18 +13,16 @@ export const containers = StyleSheet.create({
 })
 
 export const buttons = StyleSheet.create({
-  buttonGray: {
-    margin: 20,
-    padding: 12,
-    borderRadius: 10,
-    width: 350,
-    backgroundColor: '#B6B7BA'
-  },
-  buttonPurple: {
+  button:{
     margin: 20,
     padding: 12,
     borderRadius: 10,
     width: 365,
+  },
+  buttonGray: {
+    backgroundColor: '#B6B7BA'
+  },
+  buttonPurple: {
     backgroundColor: '#5C6EF8'
   }
 })
