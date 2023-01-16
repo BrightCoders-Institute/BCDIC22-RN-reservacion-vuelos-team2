@@ -100,15 +100,15 @@ export default function App() {
               </View>
               <View style={containers.buttonsContainer}>
                 {isChecked && isChecked2 === true ?
-                  <CustomButton text='Sign Up' disabled={false} /> :
-                  <CustomButton text='Sign Up' disabled={true} />
+                  <CustomButton text='Sign Up' disabled={false} icon={false}/> :
+                  <CustomButton text='Sign Up' disabled={true} icon={false} />
                 }
 
                 <Text style={texts.accountText}>or</Text>
 
                 {isChecked && isChecked2 === true ?
-                  <CustomButton text='Sign Up with Google' disabled={false} /> :
-                  <CustomButton text='Sign Up with Google' disabled={true} />
+                  <CustomButton text='Sign Up with Google' disabled={true} icon={true}/> :
+                  <CustomButton text='Sign Up with Google' disabled={true} icon={true}/>
                 }
 
                 <View style={containers.footerContainer}>
