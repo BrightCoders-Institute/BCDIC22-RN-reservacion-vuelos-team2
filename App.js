@@ -1,19 +1,15 @@
 import { useState } from 'react'
 import {
-  Button,
-  StyleSheet,
   Text,
   View,
-  TextInput,
   ScrollView,
-  TouchableOpacity
 } from 'react-native'
 import { Formik } from 'formik'
 import Checkbox from 'expo-checkbox'
-import { InputComponent } from './components/InputComponent'
-import { graphics, controls, containers, texts } from './styles/AppStyle.js'
+import { CustomInput} from './components/CustomInput'
+import { controls, containers, texts } from './styles/AppStyle.js'
 import CustomButton from './components/CustomButton'
-import UnderlinedText from './components/UnderlinedText'
+import CustomUnderlined from './components/CustomUnderlined'
 
 export default function App() {
   // const validate = (values) => {
@@ -30,17 +26,17 @@ export default function App() {
   return (
     <View style={containers.container}>
       <ScrollView>
-        <Text style={texts.tittle}>Sign Up</Text>
+        <Text style={texts.title}>Sign Up</Text>
         <Formik
           onSubmit={values => {
             validate(values)
             Keyboard.dismiss()
           }}
         >
-          {({ handleChange, handleSubmit, values, errors }) => (
+          {({ handleChange, values, errors }) => (
             <View style={containers.screenContainer}>
               <Text style={texts.titlesText}>First Name</Text>
-              <InputComponent
+              <CustomInput
                 handleChange={handleChange}
                 inputText={inputText}
                 values={values}
@@ -49,7 +45,7 @@ export default function App() {
 
               <Text style={texts.titlesText}>Email *</Text>
 
-              <InputComponent
+              <CustomInput
                 handleChange={handleChange}
                 values={values}
                 type='text'
@@ -60,7 +56,7 @@ export default function App() {
                 Password *
               </Text>
 
-              <InputComponent
+              <CustomInput
                 handleChange={handleChange}
                 values={values}
                 type='password'
@@ -81,9 +77,9 @@ export default function App() {
                 />
                 <View style={containers.underlinedTextContainer}>
                   <Text style={texts.textCheck}>I agree to the </Text>
-                  <UnderlinedText text='Terms' color='gray' />
+                  <CustomUnderlined text='Terms' color='gray' />
                   <Text style={texts.textCheck}> and </Text> 
-                  <UnderlinedText text=' Privacy Policy.' color='gray'/>
+                  <CustomUnderlined text=' Privacy Policy.' color='gray'/>
                   <Text style={texts.asterisk}> *</Text> 
                 </View>
               </View>
@@ -107,7 +103,7 @@ export default function App() {
                 <Text style={texts.accountText}>or</Text>
 
                 {isChecked && isChecked2 === true ?
-                  <CustomButton text='Sign Up with Google' disabled={true} icon={true}/> :
+                  <CustomButton text='Sign Up with Google' disabled={false} icon={true}/> :
                   <CustomButton text='Sign Up with Google' disabled={true} icon={true}/>
                 }
 
@@ -115,7 +111,7 @@ export default function App() {
                   <Text style={texts.accountText}>
                     Already have an account?{' '}
                   </Text>
-                  <UnderlinedText text='Login' 
+                  <CustomUnderlined text='Login' 
                     color='purple'
                   />
                 </View>
