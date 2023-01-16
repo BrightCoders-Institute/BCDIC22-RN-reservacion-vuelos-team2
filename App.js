@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { View, TextInput } from 'react-native';
 import CustomButton from './components/CustomButton';
@@ -25,3 +24,4 @@ export default function App() {
     </View>
   );
 }
+
