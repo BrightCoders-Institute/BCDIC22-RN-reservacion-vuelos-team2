@@ -5,7 +5,7 @@ export const texts = StyleSheet.create({
   underlinedText: {
     //marginVertical: 10,
     //marginLeft: 10,
-    fontSize: 13,
+    fontSize: 15,
     color: 'gray',
     textDecorationLine: 'underline'
   },

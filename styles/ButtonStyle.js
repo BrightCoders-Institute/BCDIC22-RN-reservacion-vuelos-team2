@@ -2,6 +2,16 @@ import {
   StyleSheet,
 } from "react-native";
 
+
+export const containers = StyleSheet.create({
+  main: {
+    display:'flex',
+    flexDirection:'row',
+    backgroundColor:'pink',
+    justifyContent:'center'
+  }
+})
+
 export const buttons = StyleSheet.create({
   buttonGray: {
     margin: 20,
@@ -25,5 +35,13 @@ export const texts = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 19
+  }
+})
+
+export const graphics = StyleSheet.create({
+  icon: {
+    width: 30,
+    height: 30,
+    marginRight: 20
   }
 })
