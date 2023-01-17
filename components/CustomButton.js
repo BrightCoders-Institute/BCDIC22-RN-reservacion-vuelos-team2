@@ -20,4 +20,4 @@ const CustomButton = ({ text, disabled, icon }) => {
   )
 }
 
-export default CustomButton
+export default CustomButton;
