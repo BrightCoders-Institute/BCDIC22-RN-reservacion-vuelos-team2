@@ -12,12 +12,6 @@ import CustomButton from './components/CustomButton'
 import CustomUnderlined from './components/CustomUnderlined'
 
 export default function App() {
-  // const validate = (values) => {
-  //   const errors = {}
-  //   if (values.password.length < 8) errors.password = 'Use eight or more characters'
-  //   alert(errors)
-  // }
-
   const [isChecked, setChecked] = useState(false)
   const [isChecked2, setChecked2] = useState(false)
   const [inputText, setInputText] = useState('')

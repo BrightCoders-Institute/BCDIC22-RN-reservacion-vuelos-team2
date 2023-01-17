@@ -1,7 +1,7 @@
 import {
   StyleSheet,
 } from "react-native";
-
+import { ColorsTheme } from "./ColorsTheme";
 
 export const containers = StyleSheet.create({
   main: {
@@ -20,10 +20,10 @@ export const buttons = StyleSheet.create({
     width: 365,
   },
   buttonGray: {
-    backgroundColor: '#B6B7BA'
+    backgroundColor: ColorsTheme.gray
   },
   buttonPurple: {
-    backgroundColor: '#5C6EF8'
+    backgroundColor: ColorsTheme.primaryColor
   }
 })
 
