@@ -3,6 +3,7 @@ import {
   Text,
   View,
   ScrollView,
+  Alert
 } from 'react-native'
 import { Formik } from 'formik'
 import Checkbox from 'expo-checkbox'
@@ -14,43 +15,46 @@ import CustomUnderlined from './components/CustomUnderlined'
 export default function App() {
   const [isChecked, setChecked] = useState(false)
   const [isChecked2, setChecked2] = useState(false)
-  const [inputText, setInputText] = useState('')
+
+  const validate = (values) => {
+    if (values.name === '' || values.email === '' || values.password === '') {
+      Alert.alert("Error", "You must fill all the fields to continue")
+    }
+  }
 
   return (
     <View style={containers.container}>
       <ScrollView>
         <Text style={texts.title}>Sign Up</Text>
         <Formik
+          initialValues={{ name: '', email: '', password: '' }}
           onSubmit={values => {
             validate(values)
-            Keyboard.dismiss()
           }}
         >
-          {({ handleChange, values, errors }) => (
+          {({ handleChange, values, errors, handleSubmit }) => (
             <View style={containers.screenContainer}>
 
               <Text style={texts.titlesText}>First Name</Text>
               <CustomInput
-                handleChange={handleChange}
-                inputText={inputText}
-                values={values}
+                handleChange={handleChange('name')}
+                value={values.name}
                 type='text'
               />
 
               <Text style={texts.titlesText}>Email *</Text>
               <CustomInput
-                handleChange={handleChange}
-                values={values}
+                handleChange={handleChange('email')}
+                value={values.email}
                 type='text'
-                onChangeText={value => setInputText(value)}
               />
 
               <Text style={texts.titlesText} type='text'>Password *</Text>
               <CustomInput
-                handleChange={handleChange}
-                values={values}
+                handleChange={handleChange('password')}
+                value={values.password}
                 type='password'
-                onChangeText={value => setInputText(value)}
+                
               />
               {errors.password ? <Text>{errors.password}</Text> : <></>}
               <Text style={texts.warningPassword}>
@@ -86,15 +90,12 @@ export default function App() {
               </View>
 
               <View style={containers.buttonsContainer}>
-                {isChecked && isChecked2 === true ?
-                  <CustomButton text='Sign Up' disabled={false} icon={false} /> :
-                  <CustomButton text='Sign Up' disabled={true} icon={false} />
+                {isChecked === true ?
+                  <CustomButton text='Sign Up' disabled={false} icon={false} handleSubmit={handleSubmit} /> :
+                  <CustomButton text='Sign Up' disabled={true} icon={false} handleSubmit={handleSubmit} />
                 }
                 <Text style={texts.accountText}>or</Text>
-                {isChecked && isChecked2 === true ?
-                  <CustomButton text='Sign Up with Google' disabled={false} icon={true} /> :
-                  <CustomButton text='Sign Up with Google' disabled={true} icon={true} />
-                }
+                <CustomButton text='Sign Up with Google' disabled={false} icon={true} handleSubmit={handleSubmit} />
 
                 <View style={containers.footerContainer}>
                   <Text style={texts.accountText}>
