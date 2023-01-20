@@ -2,12 +2,13 @@ import { Text, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import { buttons, texts, graphics, containers } from '../styles/ButtonStyle.js'
 
-const CustomButton = ({ text, disabled, icon }) => {
+const CustomButton = ({ text, disabled, icon, handleSubmit }) => {
   return (
 
     <TouchableOpacity
       style={disabled ? [containers.main, buttons.button, buttons.buttonGray] : [containers.main, buttons.button, buttons.buttonPurple]}
       disabled={disabled}
+      onPress={handleSubmit}
     >
       {icon ? 
       <Image

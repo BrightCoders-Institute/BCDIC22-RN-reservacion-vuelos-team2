@@ -3,6 +3,7 @@ import {
   Text,
   View,
   ScrollView,
+  Alert
 } from 'react-native'
 import Login from './screens/Login'
 import Signup from './screens/Signup'
