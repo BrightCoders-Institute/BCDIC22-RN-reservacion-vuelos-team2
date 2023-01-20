@@ -20,7 +20,7 @@ export const containers = StyleSheet.create({
     alignSelf: 'center',
     width: '100%',
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   checkContainer: {
     display: 'flex',

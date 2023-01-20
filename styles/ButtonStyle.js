@@ -8,7 +8,7 @@ export const containers = StyleSheet.create({
     display:'flex',
     flexDirection:'row',
     backgroundColor:'pink',
-    justifyContent:'center'
+    justifyContent:'center',
   }
 })
 
@@ -17,7 +17,7 @@ export const buttons = StyleSheet.create({
     margin: 20,
     padding: 12,
     borderRadius: 10,
-    width: 365,
+    width: '100%',
   },
   buttonGray: {
     backgroundColor: ColorsTheme.gray
