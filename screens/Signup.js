@@ -7,10 +7,10 @@ import {
 } from 'react-native'
 import { Formik } from 'formik'
 import Checkbox from 'expo-checkbox'
-import { CustomInput } from '.././components/CustomInput'
-import { controls, containers, texts } from '../styles/LoginStyle.js'
-import CustomButton from '.././components/CustomButton'
-import CustomUnderlined from '.././components/CustomUnderlined'
+import { CustomInput } from '../components/CustomInput'
+import { controls, containers, texts } from '../styles/Screens/login'
+import CustomButton from '../components/CustomButton'
+import CustomUnderlined from '../components/CustomUnderlined'
 
 const Signup = () => {
   const [isChecked, setChecked] = useState(false)

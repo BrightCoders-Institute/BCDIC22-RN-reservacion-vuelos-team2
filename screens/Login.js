@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Text, View, Alert } from 'react-native'
 import { Formik } from 'formik'
 import { CustomInput } from '../components/CustomInput'
-import { controls, containers, texts } from '../styles/LoginStyle'
+import { controls, containers, texts } from '../styles/Screens/login'
 import CustomButton from '../components/CustomButton'
 import CustomUnderlined from '../components/CustomUnderlined'
 
@@ -55,7 +55,7 @@ const Login = () => {
                 <Text style={texts.accountText}>
                   Don't you have an account?{' '}
                 </Text>
-                <CustomUnderlined text=' Sign Up'
+                <CustomUnderlined text='Signup'
                   color='purple'
                 />
               </View>
