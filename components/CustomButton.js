@@ -4,7 +4,6 @@ import { buttons, texts, graphics, containers } from '../styles/Components/butto
 
 const CustomButton = ({ text, disabled, icon, handleSubmit }) => {
   return (
-
     <TouchableOpacity
       style={disabled ? [containers.main, buttons.button, buttons.buttonGray] : [containers.main, buttons.button, buttons.buttonPurple]}
       disabled={disabled}
