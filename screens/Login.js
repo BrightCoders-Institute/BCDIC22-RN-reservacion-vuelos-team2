@@ -11,7 +11,6 @@ const Login = () => {
   const [inputText, setInputText] = useState('')
 
   const validate = (values) => {
-    console.log(values,"values")
     if (values.email === '' || values.password === '') {
       Alert.alert("Error", "You must fill all the fields to continue")
     }

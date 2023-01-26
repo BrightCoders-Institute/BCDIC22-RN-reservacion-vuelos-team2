@@ -26,9 +26,9 @@ const Booking = () => {
           />
         </TouchableOpacity>
         <FlightInfo />
-        <BookingTitle text={'Where Are You Now?'} />
-          <SelectMenu />
-        {/* <Passengers /> */}
+        {/* <BookingTitle text={'Where Are You Now?'} />
+        <SelectMenu /> */}
+        <Passengers />
         <CustomButtom style={controls.button} text='Next' />
       </View>
     </View>
