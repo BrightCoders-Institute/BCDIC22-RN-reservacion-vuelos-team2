@@ -1,9 +1,7 @@
-import Signup from './screens/Signup'
-import Login from './screens/Login'
+import MainStack from './navigation/MainStack'
 
 export default function App() {
-
   return (
-    <Signup/>
+    <MainStack/>
   );
 }

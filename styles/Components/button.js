@@ -1,7 +1,7 @@
 import {
   StyleSheet,
 } from "react-native";
-import { ColorsTheme } from "./ColorsTheme";
+import { colorsTheme } from "../colorsTheme";
 
 export const containers = StyleSheet.create({
   main: {
@@ -14,16 +14,16 @@ export const containers = StyleSheet.create({
 
 export const buttons = StyleSheet.create({
   button:{
-    margin: 20,
+    //margin: 20,
     padding: 12,
     borderRadius: 10,
-    width: 365,
+    width: '100%',
   },
   buttonGray: {
-    backgroundColor: ColorsTheme.gray
+    backgroundColor: colorsTheme.gray
   },
   buttonPurple: {
-    backgroundColor: ColorsTheme.primaryColor
+    backgroundColor: colorsTheme.primaryColor
   }
 })
 
