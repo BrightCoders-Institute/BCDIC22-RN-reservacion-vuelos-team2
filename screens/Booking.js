@@ -1,22 +1,36 @@
 import { TouchableOpacity, View } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { containers, graphics, controls } from '../styles/Screens/booking'
-import BookingTitle from '../components/BookingTitle'
 import FlightInfo from '../components/FlightInfo'
 import CustomButtom from '../components/CustomButton'
-import SelectMenu from '../components/SelectMenu'
 import { useNavigation } from "@react-navigation/native";
 import Passengers from '../components/Passengers'
+import DateCalendar from '../components/DateCalendar'
+import Origin from '../components/Origin'
+import Destination from '../components/Destination'
+import store from '../redux/store'
+import { useSelector } from 'react-redux'
+import BookingTitle from '../components/BookingTitle'
 
 
 const Booking = () => {
   const navigation = useNavigation();
+  const flightBooking = useSelector(state => state.flightInfo)
+  const counter = 1
   return (
     <View style={containers.main}>
       <View style={containers.container}>
         <TouchableOpacity
-          onPress={() =>
-            navigation.navigate('Login')
+          onPress={
+            flightBooking[0].count === 0 ?
+              (() => navigation.navigate('Login')) :
+              (() =>
+                store.dispatch({
+                  type: 'MINUS_COUNT',
+                  payload: {
+                    counter: counter
+                  }
+                }))
           }>
           <Ionicons
             name='chevron-back-outline'
@@ -25,11 +39,22 @@ const Booking = () => {
             style={graphics.backIcon}
           />
         </TouchableOpacity>
+
         <FlightInfo />
-        {/* <BookingTitle text={'Where Are You Now?'} />
-        <SelectMenu /> */}
-        <Passengers />
-        <CustomButtom style={controls.button} text='Next' />
+
+        {flightBooking[0].count === 0 ? <Origin /> :
+          flightBooking[0].count === 1 ? <Destination /> :
+            flightBooking[0].count === 2 ? <DateCalendar /> :
+              flightBooking[0].count === 3 ? <Passengers /> : <BookingTitle text='Your request was received' />}
+
+        {flightBooking[0].count === 4 ? <CustomButtom style={controls.button} text='Finish' handlePress={() => navigation.navigate('Login')} /> :
+          <CustomButtom style={controls.button} text='Next' handlePress={() => store.dispatch({
+            type: 'PLUS_COUNT',
+            payload: {
+              counter: counter
+            }
+          })} />}
+          
       </View>
     </View>
   )

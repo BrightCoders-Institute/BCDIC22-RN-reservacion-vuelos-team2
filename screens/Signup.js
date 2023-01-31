@@ -11,11 +11,13 @@ import { CustomInput } from '../components/CustomInput'
 import { controls, containers, texts } from '../styles/Screens/login'
 import CustomButton from '../components/CustomButton'
 import CustomUnderlined from '../components/CustomUnderlined'
+import { useNavigation } from "@react-navigation/native";
 
 const Signup = () => {
   const [isChecked, setChecked] = useState(false)
   const [isChecked2, setChecked2] = useState(false)
   const [inputText, setInputText] = useState('')
+  const navigation = useNavigation();
 
   const validate = (values) => {
     if (values.name === '' || values.email === '' || values.password === '') {
@@ -91,11 +93,11 @@ const Signup = () => {
 
               <View style={containers.buttonsContainer}>
                 {isChecked === true ?
-                  <CustomButton text='Sign Up' disabled={false} icon={false} handleSubmit={handleSubmit} /> :
-                  <CustomButton text='Sign Up' disabled={true} icon={false} handleSubmit={handleSubmit} />
+                  <CustomButton text='Sign Up' disabled={false} icon={false} handlePress={()=>navigation.navigate('Booking')} /> :
+                  <CustomButton text='Sign Up' disabled={true} icon={false} handlePress={()=>navigation.navigate('Booking')} />
                 }
                 <Text style={texts.accountText}>or</Text>
-                <CustomButton text='Sign Up with Google' disabled={false} icon={true} handleSubmit={handleSubmit} />
+                <CustomButton text='Sign Up with Google' disabled={false} icon={true} handlePress={()=>navigation.navigate('Booking')} />
 
                 <View style={containers.footerContainer}>
                   <Text style={texts.accountText}>

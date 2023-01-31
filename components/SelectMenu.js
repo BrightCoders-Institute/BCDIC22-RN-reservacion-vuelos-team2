@@ -4,7 +4,7 @@ import { containers, texts, controls } from '../styles/Components/selectMenu'
 import data from '../countries2.json'
 import store from '../redux/store'
 
-export default function SelectMenu() {
+export default function SelectMenu({type}) {
   const [modalVisible, setModalVisible] = useState(false)
   const [selectedDestination, setSelectedDestination] = useState('')
 
@@ -16,7 +16,7 @@ export default function SelectMenu() {
       code: code
     })
     store.dispatch({
-      type: 'ADD_DESTINATION',
+      type: type,
       payload: {
         country: country,
         capital: capital,
