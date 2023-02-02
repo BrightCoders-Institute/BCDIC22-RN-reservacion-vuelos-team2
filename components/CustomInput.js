@@ -3,20 +3,20 @@ import { graphics, controls, containers } from '../styles/Components/input'
 import { useState } from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons'
 
-export const CustomInput = ({ value, type, handleChange }) => {
-  
+export const CustomInput = ({ values, type }) => {
+  const [inputText, setInputText] = useState('')
   const [passwordVisible, setPasswordVisible] = useState(true)
 
   return (
     <View>
       {type === 'text' ? (
         <TextInput
-          onChangeText={handleChange}
+          onChangeText={value => setInputText(value)}
           name = 'firstName'
-          value = {value}
+          value = {values}
           label = 'firstName'
           style = {
-            value === ''
+            inputText === ''
               ? [controls.inputInactive, controls.input]
               : [controls.inputActive, controls.input]
           }
@@ -24,13 +24,13 @@ export const CustomInput = ({ value, type, handleChange }) => {
       ) : type === 'password' ? (
         <View style={containers.iconContainer}>
           <TextInput
-            onChangeText={handleChange}
+            onChangeText={value => setInputText(value)}
             name = 'firstName'
-            value = {value}
+            value = {values}
             label = 'firstName'
             secureTextEntry = {passwordVisible}
             style = {
-              value === ''
+              inputText === ''
                 ? [controls.inputInactive, controls.input]
                 : [controls.inputActive, controls.input]
             }
@@ -39,7 +39,7 @@ export const CustomInput = ({ value, type, handleChange }) => {
           style={{width: 30, position: 'absolute'}}
           onPress={()=>setPasswordVisible(!passwordVisible)}>
             <Ionicons
-              style = {value === '' ? [graphics.icon, graphics.iconInactive] : [graphics.icon, graphics.iconActive]}
+              style = {inputText === '' ? [graphics.icon, graphics.iconInactive] : [graphics.icon, graphics.iconActive]}
               name = {passwordVisible ? 'eye-off' : 'eye'}
               size = {18}
             />

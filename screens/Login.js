@@ -5,10 +5,12 @@ import { CustomInput } from '../components/CustomInput'
 import { controls, containers, texts } from '../styles/Screens/login'
 import CustomButton from '../components/CustomButton'
 import CustomUnderlined from '../components/CustomUnderlined'
+import { useNavigation } from "@react-navigation/native"
 
 const Login = () => {
 
   const [inputText, setInputText] = useState('')
+  const navigation = useNavigation()
 
   const validate = (values) => {
     if (values.email === '' || values.password === '') {
@@ -46,9 +48,9 @@ const Login = () => {
             
             <View style={containers.buttonsContainer}>
 
-              <CustomButton text='Login' disabled={false} icon={false} handleSubmit={handleSubmit} />
+              <CustomButton text='Login' disabled={false} icon={false} handlePress={()=>navigation.navigate('Booking')} />
               <Text style={texts.accountText}>or</Text>
-              <CustomButton text='Login with Google' disabled={false} icon={true} handleSubmit={handleSubmit} />
+              <CustomButton text='Login with Google' disabled={false} icon={true} handlePress={()=>navigation.navigate('Booking')} />
 
               <View style={containers.footerContainer}>
                 <Text style={texts.accountText}>
