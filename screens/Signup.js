@@ -3,27 +3,45 @@ import {
   Text,
   View,
   ScrollView,
-  Alert
+  Alert, Button,Linking
 } from 'react-native'
 import { Formik } from 'formik'
 import Checkbox from 'expo-checkbox'
 import { CustomInput } from '../components/CustomInput'
-import { controls, containers, texts } from '../styles/Screens/login'
+import { controls, containers, texts } from '../styles/Screens/login.js'
 import CustomButton from '../components/CustomButton'
 import CustomUnderlined from '../components/CustomUnderlined'
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native"
+import store from '../redux/store'
+import {useSelector} from 'react-redux'
 
-const Signup = () => {
+const SignUp = () => {
+  const navigation = useNavigation();
   const [isChecked, setChecked] = useState(false)
   const [isChecked2, setChecked2] = useState(false)
-  const [inputText, setInputText] = useState('')
-  const navigation = useNavigation();
+  const userAttempt = useSelector(state => state.userInformation)
 
   const validate = (values) => {
+    console.log("USERATTEMPT",userAttempt.state)
     if (values.name === '' || values.email === '' || values.password === '') {
       Alert.alert("Error", "You must fill all the fields to continue")
+     
     }
   }
+
+  const handleGoogle = async () => {
+    Linking.openURL('https://tame-red-dugong.cyclic.app/auth/google')
+    console.log('estoy en la GOOGLR signup')
+    // try {
+    //   const response = await axios.get(
+    //     'https://tame-red-dugong.cyclic.app/auth/google'
+    //   )
+    //   console.log('responseGOOGLR:', response.data)
+    // } catch (error) {
+    //   console.log('ERROR', error)
+    // }
+  }
+
 
   return (
     <View style={containers.container}>
@@ -33,12 +51,18 @@ const Signup = () => {
           initialValues={{ name: '', email: '', password: '' }}
           onSubmit={values => {
             validate(values)
+            store.dispatch({
+              type: 'CREATE_USER',
+              payload: {
+                user: values
+              }
+            })
           }}
         >
           {({ handleChange, values, errors, handleSubmit }) => (
             <View style={containers.screenContainer}>
-
-              <Text style={texts.titlesText}>First Name</Text>
+            
+              <Text style={texts.titlesText}>Username</Text>
               <CustomInput
                 handleChange={handleChange('name')}
                 value={values.name}
@@ -57,8 +81,9 @@ const Signup = () => {
                 handleChange={handleChange('password')}
                 value={values.password}
                 type='password'
-                
+
               />
+              {errors.password ? <Text>{errors.password}</Text> : <></>}
               <Text style={texts.warningPassword}>
                 Use 8 or more characters with a mix of letters, numbers and symbols
               </Text>
@@ -93,11 +118,11 @@ const Signup = () => {
 
               <View style={containers.buttonsContainer}>
                 {isChecked === true ?
-                  <CustomButton text='Sign Up' disabled={false} icon={false} handlePress={()=>navigation.navigate('Booking')} /> :
-                  <CustomButton text='Sign Up' disabled={true} icon={false} handlePress={()=>navigation.navigate('Booking')} />
+                  <CustomButton text='Sign Up' disabled={false} icon={false} handlePress={handleSubmit} /> :
+                  <CustomButton text='Sign Up' disabled={true} icon={false} handlePress={handleSubmit} />
                 }
                 <Text style={texts.accountText}>or</Text>
-                <CustomButton text='Sign Up with Google' disabled={false} icon={true} handlePress={()=>navigation.navigate('Booking')} />
+                <CustomButton text='Sign Up with Google' disabled={false} icon={true} handlePress={handleGoogle} />
 
                 <View style={containers.footerContainer}>
                   <Text style={texts.accountText}>
@@ -117,4 +142,4 @@ const Signup = () => {
   )
 }
 
-export default Signup
+export default SignUp
