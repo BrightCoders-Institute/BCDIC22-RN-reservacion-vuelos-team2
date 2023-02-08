@@ -19,4 +19,4 @@ const CustomButton = ({ text, disabled, icon, handlePress }) => {
   )
 }
 
-export default CustomButton;
+export default CustomButton

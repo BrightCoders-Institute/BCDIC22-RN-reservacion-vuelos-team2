@@ -24,7 +24,6 @@ export const controls = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
     alignItems: 'center',
-    fontSize: 14,
     paddingLeft: 5
   },
   inputActive: {

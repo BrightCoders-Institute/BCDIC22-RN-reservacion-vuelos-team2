@@ -39,8 +39,8 @@ export const containers = StyleSheet.create({
   footerContainer: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems:'center'
-  
+    alignItems: 'center'
+
   },
   modal: {
     backgroundColor: `rgba(0, 0, 0, 0.5)`,
@@ -48,7 +48,7 @@ export const containers = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-   
+
   },
   messageModal: {
     backgroundColor: '#23232B',
@@ -57,7 +57,7 @@ export const containers = StyleSheet.create({
     alignSelf: 'center',
     display: 'flex',
     flexDirection: 'column',
-    borderRadius:10
+    borderRadius: 10
   },
   animation: {
     height: '70%',
@@ -100,7 +100,7 @@ export const texts = StyleSheet.create({
   modalText: {
     color: colorsTheme.primaryColor,
     textAlign: 'center',
-    paddingBottom:30,
-    fontWeight:'bold'
+    paddingBottom: 30,
+    fontWeight: 'bold'
   }
 })

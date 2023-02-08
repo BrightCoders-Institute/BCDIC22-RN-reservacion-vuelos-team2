@@ -7,9 +7,9 @@ import { Provider } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { navigationRef } from './navigationRef'
-import store from '../redux/store';
+import store from '../redux/store'
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator()
 
 const MainStack = () => {
   return (
@@ -23,7 +23,7 @@ const MainStack = () => {
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
-  );
+  )
 }
 
-export default MainStack;
+export default MainStack

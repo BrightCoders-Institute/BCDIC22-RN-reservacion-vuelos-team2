@@ -16,27 +16,6 @@ export default function SelectMenu({ type }) {
   const [modalVisible, setModalVisible] = useState(false)
   const [selectedDestination, setSelectedDestination] = useState('')
 
-
-  // const getCountries = async () => {
-  //   console.log('getCOuhtnries')
-  //   try {
-  //     const response = await axios.get(
-  //       'https://tame-red-dugong.cyclic.appapi/countries'
-  //     )
-  //     const countries = response.data.countries
-  //     console.log(countries)
-  //     countries.map(country => {
-  //       data.push({
-  //         country: country.name_en,
-  //         capital: country.capital_en,
-  //         code: country.code_3
-  //       })
-  //     })
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
   const handleOnPress = (country, capital, code) => {
     setModalVisible(false)
     setSelectedDestination({

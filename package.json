@@ -38,7 +38,9 @@
     "redux": "^4.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "eslint": "^8.33.0",
+    "eslint-plugin-react": "^7.32.2"
   },
   "private": true,
   "jest": {

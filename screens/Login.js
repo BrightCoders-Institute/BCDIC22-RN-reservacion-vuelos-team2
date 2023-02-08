@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import { Text, View, Alert, Button, Modal, ActivityIndicator } from 'react-native'
+import { Text, View, Alert, Modal, ActivityIndicator } from 'react-native'
 import { AppState, Linking } from 'react-native'
 import { Formik } from 'formik'
 import { CustomInput } from '../components/CustomInput'
-import { controls, containers, texts } from '../styles/Screens/login.js'
+import { containers, texts } from '../styles/Screens/login.js'
 import CustomButton from '../components/CustomButton'
 import CustomUnderlined from '../components/CustomUnderlined'
 import { useNavigation } from '@react-navigation/native'
@@ -18,24 +18,6 @@ const Login = () => {
   const [isVisible, setIsVisible] = useState(false)
   const navigation = useNavigation()
 
-  // useEffect(() => {
-  //   AppState.addEventListener('change', handleAppStateChange)
-  //   return () => {
-  //     AppState.removeEventListener('change', handleAppStateChange)
-  //   }
-  // }, [])
-  // console.log(appState, 'appStateFuera')
-  // const handleAppStateChange = nextAppState => {
-  //   console.log(nextAppState, 'nextAppState')
-  //   setAppState(nextAppState)
-  //   console.log(appState, 'appStateDentro')
-  //   if (nextAppState === 'active') {
-  //     // the app has returned to the foreground after the user logged in
-  //     // you can perform any necessary actions here, such as fetching the user's updated profile
-  //     alert('Successful login with Google')
-  //   }
-  // }
-
   const validate = values => {
     if (
       values.email === '' ||
@@ -49,33 +31,12 @@ const Login = () => {
 
   const handleGoogle = async () => {
     Linking.openURL('https://tame-red-dugong.cyclic.app/auth/google')
-    console.log('estoy en la GOOGLR')
 
     setTimeout(() => {
       axios
         .get('https://tame-red-dugong.cyclic.app/successful')
-        .then(response => console.log('RESPONSEFRONT', response.data))
-      console.log('estoy en la settiemour')
+        .then(response => { })
     }, 5000)
-
-    // try {
-    //   const response = await axios.get(
-    //     'https://tame-red-dugong.cyclic.app/auth/google'
-    //   )
-    //   console.log('responseGOOGLR:', response.data)
-    // } catch (error) {
-    //   console.log('ERROR', error)
-    // }
-
-    // axios
-    //   .get('https://tame-red-dugong.cyclic.app/auth/google/callback')
-    //   .then(response => {
-    //     const { redirect } = response.data
-    //     Linking.openURL(redirect)
-    //   })
-    //   .catch(error => {
-    //     console.error(error)
-    //   })
   }
 
   return (

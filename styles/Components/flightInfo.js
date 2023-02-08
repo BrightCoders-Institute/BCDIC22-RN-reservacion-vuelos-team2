@@ -1,8 +1,7 @@
 import { StyleSheet } from 'react-native'
-import { colorsTheme } from '../colorsTheme'
 
 export const containers = StyleSheet.create({
-  master :{
+  master: {
     paddingBottom: 100
   },
   main: {
@@ -14,20 +13,15 @@ export const containers = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    //backgroundColor: 'blue',
-    //paddingTop: '6%',
   },
   placeContainer: {
     display: 'flex',
-
-
   },
   placeContainerL: {
     justifyContent: 'flex-start',
     borderBottomWidth: 1,
     borderColor: '#CECECE',
     width: '50%',
-    //backgroundColor:'yellow',
   },
   placeContainerR: {
     justifyContent: 'flex-end',
@@ -70,9 +64,7 @@ export const texts = StyleSheet.create({
 
 export const graphics = StyleSheet.create({
   icon: {
-    // backgroundColor:'red',
     position: 'absolute',
     alignSelf: 'center',
-
   }
 })

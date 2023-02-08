@@ -3,7 +3,7 @@ import {
   Text,
   View,
   ScrollView,
-  Alert, Button,Linking,Modal,ActivityIndicator 
+  Alert, Linking, Modal, ActivityIndicator
 } from 'react-native'
 import { Formik } from 'formik'
 import Checkbox from 'expo-checkbox'
@@ -13,36 +13,24 @@ import CustomButton from '../components/CustomButton'
 import CustomUnderlined from '../components/CustomUnderlined'
 import { useNavigation } from "@react-navigation/native"
 import store from '../redux/store'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const SignUp = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
   const [isChecked, setChecked] = useState(false)
   const [isChecked2, setChecked2] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   const userAttempt = useSelector(state => state.userInformation)
 
   const validate = (values) => {
-    console.log("USERATTEMPT",userAttempt.state)
     if (values.name === '' || values.email === '' || values.password === '') {
       Alert.alert("Error", "You must fill all the fields to continue")
-     
     }
   }
 
   const handleGoogle = async () => {
     Linking.openURL('https://tame-red-dugong.cyclic.app/auth/google')
-    console.log('estoy en la GOOGLR signup')
-    // try {
-    //   const response = await axios.get(
-    //     'https://tame-red-dugong.cyclic.app/auth/google'
-    //   )
-    //   console.log('responseGOOGLR:', response.data)
-    // } catch (error) {
-    //   console.log('ERROR', error)
-    // }
   }
-
 
   return (
     <View style={containers.container}>
@@ -50,22 +38,22 @@ const SignUp = () => {
         <Text style={texts.title}>Sign Up</Text>
 
         <Modal
-        animationType='slide'
-        transparent={true}
-        visible={isVisible}
-        onRequestClose={() => {
-          setIsVisible(!isVisible)
-        }}
-      >
-        <View style={containers.modal}>
-          <View style={containers.messageModal}>
-            <View style={containers.animation}>
-              <ActivityIndicator size={60} color='#5C6EF8' />
+          animationType='slide'
+          transparent={true}
+          visible={isVisible}
+          onRequestClose={() => {
+            setIsVisible(!isVisible)
+          }}
+        >
+          <View style={containers.modal}>
+            <View style={containers.messageModal}>
+              <View style={containers.animation}>
+                <ActivityIndicator size={60} color='#5C6EF8' />
+              </View>
+              <Text style={texts.modalText}>Signing up...</Text>
             </View>
-            <Text style={texts.modalText}>Signing up...</Text>
           </View>
-        </View>
-      </Modal>
+        </Modal>
 
 
         <Formik
@@ -79,14 +67,14 @@ const SignUp = () => {
               }
             })
             setIsVisible(true)
-            setTimeout(()=>{
+            setTimeout(() => {
               setIsVisible(false)
-            },3000)
+            }, 3000)
           }}
         >
           {({ handleChange, values, errors, handleSubmit }) => (
             <View style={containers.screenContainer}>
-            
+
               <Text style={texts.titlesText}>Username</Text>
               <CustomInput
                 handleChange={handleChange('name')}

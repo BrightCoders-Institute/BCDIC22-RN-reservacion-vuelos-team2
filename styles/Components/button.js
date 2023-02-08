@@ -14,7 +14,6 @@ export const containers = StyleSheet.create({
 
 export const buttons = StyleSheet.create({
   button:{
-    //margin: 20,
     padding: 12,
     borderRadius: 10,
     width: '100%',

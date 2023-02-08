@@ -2,12 +2,12 @@ import React from 'react'
 import {
   Text,
   TouchableOpacity
-} from 'react-native';
+} from 'react-native'
 import { texts } from '../styles/Components/underlined'
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native"
 
-const CustomUnderlined = ({ text, color}) => {
-  const navigation = useNavigation();
+const CustomUnderlined = ({ text, color }) => {
+  const navigation = useNavigation()
   return (
     <TouchableOpacity
       onPress={() =>
@@ -17,7 +17,7 @@ const CustomUnderlined = ({ text, color}) => {
         style={color === 'gray' ? texts.underlinedText : texts.underlinedTextPurple}
       >{text}</Text>
     </TouchableOpacity>
-  );
-};
+  )
+}
 
-export default CustomUnderlined;
+export default CustomUnderlined

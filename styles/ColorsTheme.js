@@ -1,6 +1,6 @@
 import {
   StyleSheet,
-} from "react-native";
+} from "react-native"
 
 export const colorsTheme = StyleSheet.create({
   primaryColor: '#5c6ef8',

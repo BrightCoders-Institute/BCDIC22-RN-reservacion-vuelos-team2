@@ -88,14 +88,12 @@ const storeData = async (data, key) => {
   try {
     await AsyncStorage.setItem(key, JSON.stringify(data))
   } catch (error) {
-    console.error('Error storing data', error)
   }
 }
 
 export const userInformationReducer = (state = user, action) => {
   switch (action.type) {
     case 'CREATE_USER':
-      console.log('estoy en el reducer signup')
       const newStateUser = [...state]
       newStateUser[0].name = action.payload.user.name
       newStateUser[0].email = action.payload.user.email
@@ -106,8 +104,7 @@ export const userInformationReducer = (state = user, action) => {
         password: action.payload.user.password
       }
 
-      async function createUserInDB (objectToCreate) {
-        console.log('estoy en la funcion')
+      async function createUserInDB(objectToCreate) {
         try {
           const response = await axios.post(
             'https://tame-red-dugong.cyclic.app/api/users',
@@ -115,22 +112,16 @@ export const userInformationReducer = (state = user, action) => {
           )
 
           if (response.data.status === 'OK') {
-            console.log(
-              response.data.message,
-              'MESSAGE',
-              newStateUser[0].status
-            )
             alert(response.data.message)
             navigationRef.navigate('Login')
           } else {
-            setTimeout(()=>{
+            setTimeout(() => {
               alert(response.data.message)
-            },3000)
-         
-           
+            }, 3000)
+
+
           }
         } catch (error) {
-          console.log('ERROR', error)
         }
       }
       createUserInDB(objectToCreate)
@@ -145,7 +136,7 @@ export const userInformationReducer = (state = user, action) => {
         password: action.payload.user.password
       }
 
-      async function searchUserInDB (objectToSearch) {
+      async function searchUserInDB(objectToSearch) {
         try {
           const response = await axios.post(
             'https://tame-red-dugong.cyclic.app/api/users/login',
@@ -166,11 +157,9 @@ export const userInformationReducer = (state = user, action) => {
                 navigationRef.navigate('Flights')
               })
               .catch(error => {
-                console.error(error)
               })
           }
         } catch (error) {
-          console.log('ERROR', error)
         }
       }
       searchUserInDB(objectToSearch)
@@ -219,9 +208,8 @@ export const flightInformationReducer = (state = initialState, action) => {
 
     case 'CREATE_RESERVATION':
       const reservationToCreate = action.payload.reservation
-      console.log('reservationToCreate', reservationToCreate)
 
-      async function createReservation (reservationToCreate) {
+      async function createReservation(reservationToCreate) {
         try {
           const response = await axios.post(
             'https://tame-red-dugong.cyclic.app/api/users/reservations',
@@ -232,7 +220,6 @@ export const flightInformationReducer = (state = initialState, action) => {
             alert(response.data.message)
           }
         } catch (error) {
-          console.log('ERROR', error)
         }
       }
 
@@ -248,52 +235,38 @@ const flightList = []
 export const flightsReducer = (state = flightList, action) => {
   switch (action.type) {
     case 'GET_RESERVATION':
-      console.log("Get reservations")
       const flightsState = []
-
       const user = { email: action.payload.user }
-      console.log('action.payload.user', action.payload.user)
-     
 
-      async function searchReservations (user) {
+      async function searchReservations(user) {
         try {
           const response = await axios.post(
             'https://tame-red-dugong.cyclic.app/api/users/reservations/get',
             user
           )
-
-          // flightsState?.map(flight=>console.log("QQQQQQQ",flight))
           flightsState.push(response.data.flights)
           if (flightsState.length) {
             const userFlights = flightsState
             const userFlightsString = JSON.stringify(flightsState)
 
-           await AsyncStorage.setItem('current_user_flights', userFlightsString)
+            await AsyncStorage.setItem('current_user_flights', userFlightsString)
               .then(() => {
-                console.log('Data successfully saved___')
-                //return AsyncStorage.getItem('current_user_flights')
               })
-              .then(currentUserFlights => {})
+              .then(currentUserFlights => { })
               .catch(error => {
-                console.error(error)
               })
           }
 
           if (response.data.status) {
-            // alert(response.data.message)
-            console.log("alert",response.data.message)
           }
         } catch (error) {
-          console.log('ERROR', error)
         }
       }
       searchReservations(user)
-      console.log('flightsStateReducer', flightsState)
 
       return state
 
     case 'UPDATE_USER_FLIGHTS':
-      console.log('action.payload.flights', action.payload.flights)
       return action.payload.flights
 
     default:

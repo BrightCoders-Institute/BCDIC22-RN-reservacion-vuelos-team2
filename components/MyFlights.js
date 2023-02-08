@@ -19,11 +19,7 @@ const MyFligths = () => {
   const getCurrentUser = async () => {
     try {
       const currentUser = await AsyncStorage.getItem('current_user')
-      console.log('CURRENT_USER____', JSON.parse(currentUser))
       const variable = JSON.parse(currentUser)
-      console.log('variable', variable.email)
-      //setParsedCurrentUser(prev=>JSON.parse(currentUser))
-      // console.log("hola",parsedCurrentUser)
       store.dispatch({
         type: 'GET_RESERVATION',
         payload: {
@@ -31,40 +27,33 @@ const MyFligths = () => {
         }
       })
     } catch (e) {
-      // error reading value
     }
   }
 
 
   const getCurrentUserFlights = async () => {
-    console.log('ESTOY EN FUNC')
     try {
       const currentUserFlights = await AsyncStorage.getItem(
         'current_user_flights'
       )
       let flights2 = JSON.parse(currentUserFlights)
 
-      // console.log('FLIGHTS', flights2)
       return flights2
     } catch (e) {
-      // error reading value
     }
   }
 
   const handlePress = () => {
     getCurrentUserFlights().then(data => {
       vuelos = data[0]
-
-      console.log('vuelos', vuelos)
       setFlights(prev => vuelos)
-      // console.log('flights', flights)
     })
   }
 
   return (
     <View style={containers.master}>
       <ScrollView >
-        <CustomButton text='Ver mis vuelos' handlePress={handlePress}/>
+        <CustomButton text='Ver mis vuelos' handlePress={handlePress} />
 
         {flights?.map(flight => {
           return (

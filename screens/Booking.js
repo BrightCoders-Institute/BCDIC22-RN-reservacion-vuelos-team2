@@ -30,17 +30,13 @@ const Booking = () => {
       const currentUser = await AsyncStorage.getItem('current_user')
       setParsedCurrentUser(JSON.parse(currentUser))
     } catch (e) {
-      // error reading value
     }
   }
-  
-
 
   const counter = 1
 
   const handleCreateReservation = () => {
     getCurrentUser()
-    console.log("LACREACIONXDDDDD",parsedCurrentUser)
     flightBooking[0].user = parsedCurrentUser.email
     store.dispatch({
       type: 'CREATE_RESERVATION',
@@ -59,12 +55,12 @@ const Booking = () => {
             flightBooking[0].count === 0
               ? () => navigation.navigate('Flights')
               : () =>
-                  store.dispatch({
-                    type: 'MINUS_COUNT',
-                    payload: {
-                      counter: counter
-                    }
-                  })
+                store.dispatch({
+                  type: 'MINUS_COUNT',
+                  payload: {
+                    counter: counter
+                  }
+                })
           }
         >
           <Ionicons
