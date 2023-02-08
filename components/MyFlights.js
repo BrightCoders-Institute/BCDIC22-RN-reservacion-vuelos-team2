@@ -1,15 +1,17 @@
-import { Text, View, Button, ScrollView } from 'react-native'
+import { Text, View, Button, ScrollView, Alert } from 'react-native'
 import { containers, texts, graphics } from '../styles/Components/flightInfo'
 import Ionicons from '@expo/vector-icons/Ionicons'
-import { useSelector } from 'react-redux'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useState, useEffect } from 'react'
 import store from '../redux/store'
+import CustomButton from './CustomButton'
+
 const MyFligths = () => {
   const [parsedCurrentUser, setParsedCurrentUser] = useState(null)
   const [parsedCurrentUserFlights, setParsedCurrentUserFlights] = useState(null)
- 
-  const vuelos = []
+  const [flights, setFlights] = useState(vuelos)
+  let vuelos
+
   useEffect(() => {
     getCurrentUser()
   }, [])
@@ -17,19 +19,22 @@ const MyFligths = () => {
   const getCurrentUser = async () => {
     try {
       const currentUser = await AsyncStorage.getItem('current_user')
-      console.log('CURRENT_USERaaaaaa', currentUser)
-      setParsedCurrentUser(JSON.parse(currentUser))
+      console.log('CURRENT_USER____', JSON.parse(currentUser))
+      const variable = JSON.parse(currentUser)
+      console.log('variable', variable.email)
+      //setParsedCurrentUser(prev=>JSON.parse(currentUser))
+      // console.log("hola",parsedCurrentUser)
       store.dispatch({
         type: 'GET_RESERVATION',
         payload: {
-          user: parsedCurrentUser.email
+          user: variable.email
         }
       })
-      getCurrentUserFlights()
     } catch (e) {
       // error reading value
     }
   }
+
 
   const getCurrentUserFlights = async () => {
     console.log('ESTOY EN FUNC')
@@ -37,34 +42,39 @@ const MyFligths = () => {
       const currentUserFlights = await AsyncStorage.getItem(
         'current_user_flights'
       )
-      // const flattened = currentUserFlights.flatMap(num => num);
+      let flights2 = JSON.parse(currentUserFlights)
 
-      setParsedCurrentUserFlights(JSON.parse(currentUserFlights))
-      console.log('currentUserFlightsQQQQ', parsedCurrentUserFlights[0])
-
-    
-      parsedCurrentUserFlights[0].map(m => vuelos.push(m))
-      console.log(vuelos, 'vueloe')
+      // console.log('FLIGHTS', flights2)
+      return flights2
     } catch (e) {
       // error reading value
     }
   }
 
-  const handlePress = async () => {
-    getCurrentUserFlights()
+  const handlePress = () => {
+    getCurrentUserFlights().then(data => {
+      vuelos = data[0]
+
+      console.log('vuelos', vuelos)
+      setFlights(prev => vuelos)
+      // console.log('flights', flights)
+    })
   }
 
   return (
-    <View>
-      <ScrollView>
-        <Button title='CLickme' onPress={handlePress}></Button>
-        {vuelos?.map(flight => {
+    <View style={containers.master}>
+      <ScrollView >
+        <CustomButton text='Ver mis vuelos' handlePress={handlePress}/>
+
+        {flights?.map(flight => {
           return (
-            <View style={[containers.main, { borderBottomWidth: 1 }]}>
+            <View key={flight._id} style={containers.main}>
               <View style={containers.infoContainer}>
                 <View style={containers.placeContainerL}>
                   <Text style={texts.cityText}>{flight.originCode}</Text>
-                  <Text style={texts.countryText}>{flight.originCountry}</Text>
+                  <Text style={texts.countryText}>
+                    {flight.originCountry}
+                  </Text>
                 </View>
                 <View style={containers.iconContainer}>
                   <Ionicons
@@ -75,17 +85,16 @@ const MyFligths = () => {
                   />
                 </View>
                 <View style={containers.placeContainerR}>
-                  <Text style={texts.cityText}>{flight.destinationCode}</Text>
+                  <Text style={texts.cityText}>
+                    {flight.destinationCode}
+                  </Text>
                   <Text style={texts.countryText}>
                     {flight.destinationCountry}
                   </Text>
                 </View>
               </View>
               <View
-                style={[
-                  containers.datePassengersContainer,
-                  { marginBottom: 20, marginTop: 10 }
-                ]}
+                style={containers.datePassengersContainer}
               >
                 <Text style={texts.dateText}>{flight.date}</Text>
                 <Text style={texts.dateText}>
@@ -94,7 +103,8 @@ const MyFligths = () => {
               </View>
             </View>
           )
-        })}
+        })
+        }
       </ScrollView>
     </View>
   )

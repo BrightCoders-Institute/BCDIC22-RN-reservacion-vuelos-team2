@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Text, View, Alert, Button } from 'react-native'
+import { Text, View, Alert, Button, Modal, ActivityIndicator } from 'react-native'
 import { AppState, Linking } from 'react-native'
 import { Formik } from 'formik'
 import { CustomInput } from '../components/CustomInput'
@@ -10,9 +10,12 @@ import { useNavigation } from '@react-navigation/native'
 import store from '../redux/store'
 import axios from 'axios'
 
+
 const Login = () => {
   const [appState, setAppState] = useState(AppState.currentState)
   const [inputText, setInputText] = useState('')
+  const [modalVisible, setModalVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
   const navigation = useNavigation()
 
   // useEffect(() => {
@@ -48,11 +51,13 @@ const Login = () => {
     Linking.openURL('https://tame-red-dugong.cyclic.app/auth/google')
     console.log('estoy en la GOOGLR')
 
-    setTimeout(()=>{
-      axios.get('https://tame-red-dugong.cyclic.app/successful').then(response=>console.log("RESPONSEFRONT",response.data))
+    setTimeout(() => {
+      axios
+        .get('https://tame-red-dugong.cyclic.app/successful')
+        .then(response => console.log('RESPONSEFRONT', response.data))
       console.log('estoy en la settiemour')
-    },5000)
-   
+    }, 5000)
+
     // try {
     //   const response = await axios.get(
     //     'https://tame-red-dugong.cyclic.app/auth/google'
@@ -75,12 +80,30 @@ const Login = () => {
 
   return (
     <View style={containers.container}>
-      <Text>hola</Text>
       <Text style={texts.title}>Login</Text>
+
+      <Modal
+        animationType='slide'
+        transparent={true}
+        visible={isVisible}
+        onRequestClose={() => {
+          setIsVisible(!isVisible)
+        }}
+      >
+        <View style={containers.modal}>
+          <View style={containers.messageModal}>
+            <View style={containers.animation}>
+              <ActivityIndicator size={60} color='#5C6EF8' />
+            </View>
+            <Text style={texts.modalText}>Signing in...</Text>
+          </View>
+        </View>
+      </Modal>
 
       <Formik
         initialValues={{ email: '', password: '' }}
         onSubmit={values => {
+
           validate(values)
           store.dispatch({
             type: 'LOGIN_USER',
@@ -88,10 +111,11 @@ const Login = () => {
               user: values
             }
           })
+          setIsVisible(true)
+          setTimeout(() => {
+            setIsVisible(false)
+          }, 20000)
 
-          values.email = ''
-          values.password = ''
-          // Keyboard.dismiss()
         }}
       >
         {({ handleChange, handleSubmit, values, errors }) => (

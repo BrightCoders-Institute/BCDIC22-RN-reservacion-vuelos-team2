@@ -40,6 +40,28 @@ export const containers = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems:'center'
+  
+  },
+  modal: {
+    backgroundColor: `rgba(0, 0, 0, 0.5)`,
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+   
+  },
+  messageModal: {
+    backgroundColor: '#23232B',
+    width: '27%',
+    height: '20%',
+    alignSelf: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    borderRadius:10
+  },
+  animation: {
+    height: '70%',
+    justifyContent: 'center'
   }
 })
 
@@ -74,5 +96,11 @@ export const texts = StyleSheet.create({
   asterisk: {
     color: 'red',
     fontWeight: 'bold'
+  },
+  modalText: {
+    color: colorsTheme.primaryColor,
+    textAlign: 'center',
+    paddingBottom:30,
+    fontWeight:'bold'
   }
 })

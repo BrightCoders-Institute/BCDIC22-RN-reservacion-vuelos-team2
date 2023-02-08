@@ -1,27 +1,39 @@
-import { TouchableOpacity, View, Text, Button, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import MyFligths from '../components/MyFlights'
 import { containers, texts } from '../styles/Screens/flights'
-import store from '../redux/store'
-import { useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useState, useEffect } from 'react'
-import { createIconSetFromFontello } from '@expo/vector-icons'
-import MyFlights from '../components/MyFlights/'
+import { AntDesign } from '@expo/vector-icons'
+import { colorsTheme } from '../styles/colorsTheme'
+import { graphics } from '../styles/Screens/booking'
+import Ionicons from '@expo/vector-icons/Ionicons'
 
 const Flights = () => {
   const navigation = useNavigation()
 
   return (
     <View style={containers.main}>
+      <TouchableOpacity onPress={ () =>
+        navigation.navigate('Login')
+      }>
+        <Ionicons
+          name='chevron-back-outline'
+          size={30}
+          color='#5c6ef8'
+          style={graphics.backIcon}
+        />
+      </TouchableOpacity>
       <Text style={texts.title}>My Flights</Text>
-      <Button
-        title='CREATE NEW RESERVATION'
-        onPress={() => navigation.navigate('Booking')}
-      ></Button>
 
-      <View>
-        <MyFlights />
+      <View style={containers.myFlightsView}>
+        <MyFligths />
+      </View>
+
+      <View style={containers.buttonContent}>
+
+        <TouchableOpacity onPress={() => navigation.navigate('Booking')} >
+          <AntDesign name='pluscircle' size={75} color={colorsTheme.primaryColor} />
+        </TouchableOpacity>
+
       </View>
     </View>
   )
