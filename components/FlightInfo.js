@@ -35,8 +35,8 @@ const FlightInfo = () => {
             )}
           </View>
         </View>
-      )}
-
+      )
+      }
     </View>
   )
 }

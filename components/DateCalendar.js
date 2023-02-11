@@ -2,10 +2,9 @@ import { View } from 'react-native'
 import BookingTitle from './BookingTitle'
 import { AntDesign } from '@expo/vector-icons'
 import { containers } from '../styles/Components/dateCalendar'
-import { Calendar, CalendarList, Agenda } from 'react-native-calendars'
+import { Calendar } from 'react-native-calendars'
 import { useState } from 'react'
 import store from '../redux/store'
-import { useSelector } from 'react-redux'
 import moment from 'moment'
 
 const DateCalendar = () => {
@@ -24,43 +23,43 @@ const DateCalendar = () => {
     switch (monthNumber) {
       case 1:
         monthWord = 'January'
-        break;
+        break
       case 2:
         monthWord = 'February'
-        break;
+        break
       case 3:
         monthWord = 'March'
-        break;
+        break
       case 4:
         monthWord = 'April'
-        break;
+        break
       case 5:
         monthWord = 'May'
-        break;
+        break
       case 6:
         monthWord = 'June'
-        break;
+        break
       case 7:
         monthWord = 'July'
-        break;
+        break
       case 8:
         monthWord = 'August'
-        break;
+        break
       case 9:
         monthWord = 'September'
-        break;
+        break
       case 10:
         monthWord = 'October'
-        break;
+        break
       case 11:
         monthWord = 'November'
-        break;
+        break
       case 12:
         monthWord = 'December'
-        break;
+        break
       default:
         monthWord = 'undefined'
-        break;
+        break
     }
     let dateText = monthWord + ' ' + day.day + ', ' + day.year
     store.dispatch({

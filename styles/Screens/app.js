@@ -39,7 +39,7 @@ export const containers = StyleSheet.create({
   footerContainer: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems:'center'
+    alignItems: 'center'
   }
 })
 

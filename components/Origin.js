@@ -8,7 +8,7 @@ const Origin = () => {
       <View>
         <BookingTitle text={'Where are you now?'} />
       </View>
-      <SelectMenu type='ADD_ORIGIN'/>
+      <SelectMenu type='ADD_ORIGIN' />
     </View>
   )
 }

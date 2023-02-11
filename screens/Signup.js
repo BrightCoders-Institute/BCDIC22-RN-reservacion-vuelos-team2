@@ -3,21 +3,24 @@ import {
   Text,
   View,
   ScrollView,
-  Alert
+  Alert, Linking, Modal, ActivityIndicator
 } from 'react-native'
 import { Formik } from 'formik'
 import Checkbox from 'expo-checkbox'
 import { CustomInput } from '../components/CustomInput'
-import { controls, containers, texts } from '../styles/Screens/login'
+import { controls, containers, texts } from '../styles/Screens/login.js'
 import CustomButton from '../components/CustomButton'
 import CustomUnderlined from '../components/CustomUnderlined'
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native"
+import store from '../redux/store'
+import { useSelector } from 'react-redux'
 
-const Signup = () => {
+const SignUp = () => {
+  const navigation = useNavigation()
   const [isChecked, setChecked] = useState(false)
   const [isChecked2, setChecked2] = useState(false)
-  const [inputText, setInputText] = useState('')
-  const navigation = useNavigation();
+  const [isVisible, setIsVisible] = useState(false)
+  const userAttempt = useSelector(state => state.userInformation)
 
   const validate = (values) => {
     if (values.name === '' || values.email === '' || values.password === '') {
@@ -25,20 +28,54 @@ const Signup = () => {
     }
   }
 
+  const handleGoogle = async () => {
+    Linking.openURL('https://tame-red-dugong.cyclic.app/auth/google')
+  }
+
   return (
     <View style={containers.container}>
       <ScrollView>
         <Text style={texts.title}>Sign Up</Text>
+
+        <Modal
+          animationType='slide'
+          transparent={true}
+          visible={isVisible}
+          onRequestClose={() => {
+            setIsVisible(!isVisible)
+          }}
+        >
+          <View style={containers.modal}>
+            <View style={containers.messageModal}>
+              <View style={containers.animation}>
+                <ActivityIndicator size={60} color='#5C6EF8' />
+              </View>
+              <Text style={texts.modalText}>Signing up...</Text>
+            </View>
+          </View>
+        </Modal>
+
+
         <Formik
           initialValues={{ name: '', email: '', password: '' }}
           onSubmit={values => {
             validate(values)
+            store.dispatch({
+              type: 'CREATE_USER',
+              payload: {
+                user: values
+              }
+            })
+            setIsVisible(true)
+            setTimeout(() => {
+              setIsVisible(false)
+            }, 3000)
           }}
         >
           {({ handleChange, values, errors, handleSubmit }) => (
             <View style={containers.screenContainer}>
 
-              <Text style={texts.titlesText}>First Name</Text>
+              <Text style={texts.titlesText}>Username</Text>
               <CustomInput
                 handleChange={handleChange('name')}
                 value={values.name}
@@ -57,8 +94,9 @@ const Signup = () => {
                 handleChange={handleChange('password')}
                 value={values.password}
                 type='password'
-                
+
               />
+              {errors.password ? <Text>{errors.password}</Text> : <></>}
               <Text style={texts.warningPassword}>
                 Use 8 or more characters with a mix of letters, numbers and symbols
               </Text>
@@ -93,11 +131,11 @@ const Signup = () => {
 
               <View style={containers.buttonsContainer}>
                 {isChecked === true ?
-                  <CustomButton text='Sign Up' disabled={false} icon={false} handlePress={()=>navigation.navigate('Booking')} /> :
-                  <CustomButton text='Sign Up' disabled={true} icon={false} handlePress={()=>navigation.navigate('Booking')} />
+                  <CustomButton text='Sign Up' disabled={false} icon={false} handlePress={handleSubmit} /> :
+                  <CustomButton text='Sign Up' disabled={true} icon={false} handlePress={handleSubmit} />
                 }
                 <Text style={texts.accountText}>or</Text>
-                <CustomButton text='Sign Up with Google' disabled={false} icon={true} handlePress={()=>navigation.navigate('Booking')} />
+                <CustomButton text='Sign Up with Google' disabled={false} icon={true} handlePress={handleGoogle} />
 
                 <View style={containers.footerContainer}>
                   <Text style={texts.accountText}>
@@ -117,4 +155,4 @@ const Signup = () => {
   )
 }
 
-export default Signup
+export default SignUp

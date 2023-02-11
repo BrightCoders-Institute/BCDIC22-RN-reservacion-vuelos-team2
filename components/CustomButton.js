@@ -1,6 +1,6 @@
 import { Text, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
-import { buttons, texts, graphics, containers } from '../styles/Components/button'
+import { buttons, texts, graphics, containers } from '../styles/Components/button.js'
 
 const CustomButton = ({ text, disabled, icon, handlePress }) => {
   return (
@@ -9,12 +9,11 @@ const CustomButton = ({ text, disabled, icon, handlePress }) => {
       disabled={disabled}
       onPress={handlePress}
     >
-      {icon ? 
-      <Image
-        source = {require('../assets/google.png')}
-        style = {graphics.icon}
-      /> : ''}
-
+      {icon ?
+        <Image
+          source={require('../assets/google.png')}
+          style={graphics.icon}
+        /> : ''}
       <Text style={texts.text}>{text}</Text>
     </TouchableOpacity>
   )

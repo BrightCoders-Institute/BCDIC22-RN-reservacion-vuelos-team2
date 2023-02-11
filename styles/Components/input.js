@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { colorsTheme } from '../colorsTheme';
+import { StyleSheet } from 'react-native'
+import { colorsTheme } from '../colorsTheme'
 
 export const graphics = StyleSheet.create({
   icon: {
@@ -24,7 +24,6 @@ export const controls = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
     alignItems: 'center',
-    fontSize: 14,
     paddingLeft: 5
   },
   inputActive: {

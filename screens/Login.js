@@ -1,37 +1,86 @@
-import { useState } from 'react'
-import { Text, View, Alert } from 'react-native'
+import { useState, useEffect } from 'react'
+import { Text, View, Alert, Modal, ActivityIndicator } from 'react-native'
+import { AppState, Linking } from 'react-native'
 import { Formik } from 'formik'
 import { CustomInput } from '../components/CustomInput'
-import { controls, containers, texts } from '../styles/Screens/login'
+import { containers, texts } from '../styles/Screens/login.js'
 import CustomButton from '../components/CustomButton'
 import CustomUnderlined from '../components/CustomUnderlined'
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation } from '@react-navigation/native'
+import store from '../redux/store'
+import axios from 'axios'
+
 
 const Login = () => {
-
+  const [appState, setAppState] = useState(AppState.currentState)
   const [inputText, setInputText] = useState('')
+  const [modalVisible, setModalVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
   const navigation = useNavigation()
 
-  const validate = (values) => {
-    if (values.email === '' || values.password === '') {
-      Alert.alert("Error", "You must fill all the fields to continue")
+  const validate = values => {
+    if (
+      values.email === '' ||
+      values.password === '' ||
+      values.email === undefined ||
+      values.password === undefined
+    ) {
+      Alert.alert('Error', 'You must fill all the fields to continue')
     }
+  }
+
+  const handleGoogle = async () => {
+    Linking.openURL('https://tame-red-dugong.cyclic.app/auth/google')
+
+    setTimeout(() => {
+      axios
+        .get('https://tame-red-dugong.cyclic.app/successful')
+        .then(response => { })
+    }, 5000)
   }
 
   return (
     <View style={containers.container}>
-
       <Text style={texts.title}>Login</Text>
-      <Formik
-        initialValues={{email: '', password: '' }}
-        onSubmit={values => {
-          validate(values)
+
+      <Modal
+        animationType='slide'
+        transparent={true}
+        visible={isVisible}
+        onRequestClose={() => {
+          setIsVisible(!isVisible)
         }}
       >
-        {({ handleChange, values, errors, handleSubmit }) => (
-          <View style={containers.screenContainer}>
+        <View style={containers.modal}>
+          <View style={containers.messageModal}>
+            <View style={containers.animation}>
+              <ActivityIndicator size={60} color='#5C6EF8' />
+            </View>
+            <Text style={texts.modalText}>Signing in...</Text>
+          </View>
+        </View>
+      </Modal>
 
-            
+      <Formik
+        initialValues={{ email: '', password: '' }}
+        onSubmit={values => {
+
+          validate(values)
+          store.dispatch({
+            type: 'LOGIN_USER',
+            payload: {
+              user: values
+            }
+          })
+          setIsVisible(true)
+          setTimeout(() => {
+            setIsVisible(false)
+          }, 20000)
+
+        }}
+      >
+        {({ handleChange, handleSubmit, values, errors }) => (
+          <View style={containers.screenContainer}>
             <Text style={texts.titlesText}>Email *</Text>
             <CustomInput
               handleChange={handleChange('email')}
@@ -39,33 +88,44 @@ const Login = () => {
               type='text'
             />
 
-            <Text style={texts.titlesText} type='text'>Password *</Text>
+            <Text style={texts.titlesText} type='text'>
+              Password *
+            </Text>
             <CustomInput
               handleChange={handleChange('password')}
               value={values.password}
               type='password'
             />
-            
-            <View style={containers.buttonsContainer}>
+            <Text style={texts.warningPassword}>
+              Use 8 or more characters with a mix of letters, numbers and
+              symbols
+            </Text>
 
-              <CustomButton text='Login' disabled={false} icon={false} handlePress={()=>navigation.navigate('Booking')} />
+            <View style={containers.buttonsContainer}>
+              <CustomButton
+                text='Sign In'
+                disabled={false}
+                icon={false}
+                handlePress={handleSubmit}
+              />
               <Text style={texts.accountText}>or</Text>
-              <CustomButton text='Login with Google' disabled={false} icon={true} handlePress={()=>navigation.navigate('Booking')} />
+              <CustomButton
+                text='Sign In with Google'
+                disabled={false}
+                icon={true}
+                handlePress={handleGoogle}
+              />
 
               <View style={containers.footerContainer}>
                 <Text style={texts.accountText}>
-                  Don't you have an account?{' '}
+                  Don't you have an account?
                 </Text>
-                <CustomUnderlined text='Signup'
-                  color='purple'
-                />
+                <CustomUnderlined text='Signup' color='purple' />
               </View>
             </View>
-
           </View>
         )}
       </Formik>
-
     </View>
   )
 }

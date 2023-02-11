@@ -17,7 +17,7 @@ const CustomUnderlined = ({ text, color }) => {
         style={color === 'gray' ? texts.underlinedText : texts.underlinedTextPurple}
       >{text}</Text>
     </TouchableOpacity>
-  );
-};
+  )
+}
 
 export default CustomUnderlined

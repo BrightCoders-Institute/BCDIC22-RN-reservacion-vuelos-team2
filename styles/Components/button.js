@@ -1,20 +1,19 @@
 import {
   StyleSheet,
-} from "react-native";
-import { colorsTheme } from "../colorsTheme";
+} from "react-native"
+import { colorsTheme } from "../colorsTheme"
 
 export const containers = StyleSheet.create({
   main: {
     display:'flex',
     flexDirection:'row',
     backgroundColor:'pink',
-    justifyContent:'center'
+    justifyContent:'center',
   }
 })
 
 export const buttons = StyleSheet.create({
   button:{
-    //margin: 20,
     padding: 12,
     borderRadius: 10,
     width: '100%',
